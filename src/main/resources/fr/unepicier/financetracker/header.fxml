@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+
+<MenuBar xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="fr.unepicier.financetracker.controller.HeaderController">
+    <fx:define>
+        <ToggleGroup fx:id="toggleGroup"/>
+    </fx:define>
+
+    <Menu text="Navigation">
+        <RadioMenuItem text="Table" onAction="#setView" toggleGroup="$toggleGroup" selected="true"/>
+        <RadioMenuItem text="Graphics" onAction="#setView" toggleGroup="$toggleGroup"/>
+    </Menu>
+
+</MenuBar>

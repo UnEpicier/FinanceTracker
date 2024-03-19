@@ -1,6 +1,5 @@
-.root {
+* {
     -background: #f0f0f0;
-
     -primary: #034f84;
     -primary-disabled: #92a8d1;
     -secondary: #f7786b;
@@ -40,7 +39,7 @@
 }
 
 .background-pane {
-    -fx-background-color: -bg-gradient;
+    -fx-background-color: -background;
     -fx-padding: 10px 15px;
     -fx-background-radius: 10px;
 }
@@ -103,11 +102,11 @@
     -fx-padding: 0.0em;
 }
 
-.table-row-cell:highlighted {
+/*.table-row-cell:highlighted {
     -fx-background-color: -primary;
     -fx-background-radius: 5px;
     -fx-background-insets: 2px;
-}
+}*/
 
 .table-row-cell:selected {
     -fx-background-color: -tertiary;

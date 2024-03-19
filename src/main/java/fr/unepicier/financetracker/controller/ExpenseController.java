@@ -1,41 +1,40 @@
 package fr.unepicier.financetracker.controller;
 
-import fr.unepicier.financetracker.model.Expense;
-import fr.unepicier.financetracker.utils.ExpenseDAO;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
+import fr.unepicier.financetracker.FinanceTrackerApplication;
 import javafx.fxml.FXML;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.TableView;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.layout.VBox;
 import org.slf4j.Logger;
 
-import java.util.Optional;
+import java.io.IOException;
+import java.net.URL;
+import java.util.Objects;
+import java.util.ResourceBundle;
 
 import static org.slf4j.LoggerFactory.getLogger;
 
-public class ExpenseController {
-    private static final Logger log = getLogger(ExpenseController.class);
+public class ExpenseController implements Initializable {
+    Logger log = getLogger(ExpenseController.class);
 
     @FXML
-    private TableView<Expense> expenseTable;
+    private VBox root;
 
-    private final ObservableList<Expense> items = FXCollections.observableArrayList();
+    @FXML
+    private HeaderController headerController;
 
-    public void initialize() {
-        items.addAll(ExpenseDAO.getExpenses());
-        expenseTable.setItems(items);
-    }
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        headerController.getViewValue().addListener((observable, oldValue, newValue) -> {
+            try {
+                Node component = FXMLLoader.load(Objects.requireNonNull(FinanceTrackerApplication.class.getResource("expense-" + newValue.toLowerCase() + ".fxml")));
+                root.getChildren().removeLast();
+                root.getChildren().add(component);
+            } catch (IOException e) {
+                log.error("Unable to load expense-" + newValue.toLowerCase() + ".fxml");
+            }
 
-
-
-    public void addExpense(ActionEvent event) {
-        Dialog<Expense> addPersonDialog = new ExpenseDialog();
-        Optional<Expense> result = addPersonDialog.showAndWait();
-        result.ifPresent(items::add);
-
-        log.debug(result.toString());
-
-        event.consume();
+        });
     }
 }
