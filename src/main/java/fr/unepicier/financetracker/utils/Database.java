@@ -1,10 +1,10 @@
 package fr.unepicier.financetracker.utils;
 
+import fr.unepicier.financetracker.FinanceTrackerApplication;
 import org.sqlite.JDBC;
 
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -12,9 +12,12 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.logging.Level;
-import java.util.logging.Logger;
+import org.slf4j.Logger;
+
+import static org.slf4j.LoggerFactory.getLogger;
 
 public class Database {
+    private static final Logger log = getLogger(FinanceTrackerApplication.class);
 
     /**
      * Location of database
@@ -46,7 +49,7 @@ public class Database {
             DriverManager.registerDriver(new JDBC());
             return true;
         } catch (ClassNotFoundException | SQLException classNotFoundException) {
-            Logger.getAnonymousLogger().log(Level.SEVERE, LocalDateTime.now() + ": Could not start SQLite Drivers");
+            log.error("Could not start SQLite Drivers", classNotFoundException);
             return false;
         }
     }
@@ -55,7 +58,7 @@ public class Database {
         try (Connection connection = connect()) {
             return connection != null;
         } catch (SQLException e) {
-            Logger.getAnonymousLogger().log(Level.SEVERE, LocalDateTime.now() + ": Could not connect to database");
+            log.error("Could not connect to SQLite DB");
             return false;
         }
     }
@@ -81,7 +84,7 @@ public class Database {
             statement.executeUpdate();
             return true;
         } catch (SQLException exception) {
-            Logger.getAnonymousLogger().log(Level.SEVERE, LocalDateTime.now() + ": Could not find tables in database");
+            log.error("Could not create tables in database", exception);
             return false;
         }
     }
@@ -92,9 +95,7 @@ public class Database {
         try {
             connection = DriverManager.getConnection(dbPrefix + location);
         } catch (SQLException exception) {
-            Logger.getAnonymousLogger().log(Level.SEVERE,
-                    LocalDateTime.now() + ": Could not connect to SQLite DB at " +
-                            location);
+            log.error("Could not connect to SQLite DB" + location, exception);
             return null;
         }
         return connection;
