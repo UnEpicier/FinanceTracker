@@ -31,40 +31,40 @@ public class Expense {
 
     // Getters
 
-    public String getDate() {
-        return date.format(DATE_FORMAT);
+    public LocalDate getDate() {
+        return date;
     }
 
-    public String getTotal() {
-        return String.format(PRICE_FORMAT, total);
+    public float getTotal() {
+        return total;
     }
 
-    public String getHousing() {
-        return String.format(PRICE_FORMAT, housing);
+    public float getHousing() {
+        return housing;
     }
 
-    public String getFood() {
-        return String.format(PRICE_FORMAT, food);
+    public float getFood() {
+        return food;
     }
 
-    public String getGoingOut() {
-        return String.format(PRICE_FORMAT, goingOut);
+    public float getGoingOut() {
+        return goingOut;
     }
 
-    public String getTransportation() {
-        return String.format(PRICE_FORMAT, transportation);
+    public float getTransportation() {
+        return transportation;
     }
 
-    public String getTravel() {
-        return String.format(PRICE_FORMAT, travel);
+    public float getTravel() {
+        return travel;
     }
 
-    public String getTax() {
-        return String.format(PRICE_FORMAT, tax);
+    public float getTax() {
+        return tax;
     }
 
-    public String getOther() {
-        return String.format(PRICE_FORMAT, other);
+    public float getOther() {
+        return other;
     }
 
     @Override

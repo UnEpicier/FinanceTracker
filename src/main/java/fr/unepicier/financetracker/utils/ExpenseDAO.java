@@ -1,15 +1,20 @@
 package fr.unepicier.financetracker.utils;
 
 import fr.unepicier.financetracker.model.Expense;
+import org.slf4j.Logger;
 
-import javax.xml.transform.Result;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.slf4j.LoggerFactory.getLogger;
+
 public class ExpenseDAO {
+    private static final Logger log = getLogger(ExpenseDAO.class);
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
     public static void addExpense(String date, Float housing, Float food, Float goingOut, Float transportation, Float travel, Float tax, Float other) {
         String query = "INSERT INTO expense(date, housing, food, goingOut, transportation, travel, tax, other) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -57,5 +62,32 @@ public class ExpenseDAO {
         }
 
         return expenseArray;
+    }
+
+    public static List<Expense> findLastExpensesEndingAtCurrentMonth(int numberOfLine, LocalDate currentMonth) {
+        String query = "SELECT * FROM expense WHERE date <= '" + currentMonth.format(DATE_FORMAT)
+                + "' ORDER BY date DESC LIMIT " + numberOfLine;
+
+        List<Expense> lastExpenses = new ArrayList<>();
+
+        try (Connection connection = Database.connect()) {
+            PreparedStatement statement = connection.prepareStatement(query);
+            ResultSet rs = statement.executeQuery();
+            while (rs.next()) {
+                lastExpenses.add(new Expense(
+                        LocalDate.parse(rs.getString("date"), DATE_FORMAT),
+                        rs.getFloat("housing"),
+                        rs.getFloat("food"),
+                        rs.getFloat("goingOut"),
+                        rs.getFloat("transportation"),
+                        rs.getFloat("travel"),
+                        rs.getFloat("tax"),
+                        rs.getFloat("other")));
+            }
+        } catch (SQLException e) {
+            log.error("Could not load Expenses from database", e);
+        }
+        return lastExpenses;
+
     }
 }

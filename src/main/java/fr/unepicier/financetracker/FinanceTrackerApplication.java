@@ -39,6 +39,6 @@ public class FinanceTrackerApplication extends Application {
         stage.getIcons().add(new Image(String.valueOf(FinanceTrackerApplication.class.getResource("assets/FinanceTracker.png"))));
         stage.setScene(scene);
         stage.show();
-        log.info("Successfully loaded Finance Tracker...");
+        log.info("Successfully loaded Finance Tracker");
     }
 }

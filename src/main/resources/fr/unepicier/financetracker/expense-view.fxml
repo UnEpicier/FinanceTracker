@@ -11,5 +11,5 @@
         fx:id="root"
 >
     <fx:include fx:id="header" source="header.fxml" />
-    <fx:include source="expense-table.fxml" />
+    <fx:include source="expense-graphics.fxml" />
 </VBox>

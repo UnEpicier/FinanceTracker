@@ -10,8 +10,8 @@
     </fx:define>
 
     <Menu text="Navigation">
-        <RadioMenuItem text="Table" onAction="#setView" toggleGroup="$toggleGroup" selected="true"/>
-        <RadioMenuItem text="Graphics" onAction="#setView" toggleGroup="$toggleGroup"/>
+        <RadioMenuItem text="Graphics" onAction="#setView" toggleGroup="$toggleGroup" selected="true"/>
+        <RadioMenuItem text="Table" onAction="#setView" toggleGroup="$toggleGroup"/>
     </Menu>
 
 </MenuBar>

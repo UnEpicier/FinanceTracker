@@ -34,7 +34,6 @@ public class ExpenseController implements Initializable {
             } catch (IOException e) {
                 log.error("Unable to load expense-" + newValue.toLowerCase() + ".fxml");
             }
-
         });
     }
 }
