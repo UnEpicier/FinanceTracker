@@ -29,6 +29,15 @@
                     </yAxis>
                 </LineChart>
             </HBox>
+
+            <BarChart fx:id="barChart" title="Dépenses VS revenus" legendVisible="true" >
+                <xAxis>
+                    <CategoryAxis fx:id="xBarAxis" side="BOTTOM" label="Date" />
+                </xAxis>
+                <yAxis>
+                    <CategoryAxis fx:id="yBarAxis" side="LEFT" label="Montant" />
+                </yAxis>
+            </BarChart>
         </VBox>
     </center>
 </BorderPane>
