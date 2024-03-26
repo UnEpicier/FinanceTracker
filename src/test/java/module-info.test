@@ -5,7 +5,7 @@
   javafx.graphics/com.sun.javafx.application=testfx.core
 
 --add-opens
-  com.example.financemanager/com.example.financemanager=testfx.junit5
+  fr.unepicier.financetracker/fr.unepicier.financetracker=testfx.junit5
 
 --add-reads
-  com.example.financemanager=testfx.core,testfx.junit5,org.hamcrest
+  fr.unepicier.financetracker=testfx.core,testfx.junit5,org.hamcrest
