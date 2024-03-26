@@ -27,12 +27,22 @@ public class ExpenseController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         headerController.getViewValue().addListener((observable, oldValue, newValue) -> {
+            String fileName = "";
+
             try {
-                Node component = FXMLLoader.load(Objects.requireNonNull(FinanceTrackerApplication.class.getResource("expense-" + newValue.toLowerCase() + ".fxml")));
+                if (Objects.equals(newValue, "Graphics")) {
+                    fileName = "expense-graphics.fxml";
+                } else if (Objects.equals(newValue, "Expenses")) {
+                    fileName = "expense-table.fxml";
+                } else if (Objects.equals(newValue, "Incomes")) {
+                    fileName = "income-table.fxml";
+                }
+
+                Node component = FXMLLoader.load(Objects.requireNonNull(FinanceTrackerApplication.class.getResource(fileName)));
                 root.getChildren().removeLast();
                 root.getChildren().add(component);
             } catch (IOException e) {
-                log.error("Unable to load expense-" + newValue.toLowerCase() + ".fxml");
+                log.error("Unable to load " + fileName);
             }
         });
     }

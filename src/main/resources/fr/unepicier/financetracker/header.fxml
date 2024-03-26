@@ -11,7 +11,8 @@
 
     <Menu text="Navigation">
         <RadioMenuItem text="Graphics" onAction="#setView" toggleGroup="$toggleGroup" selected="true"/>
-        <RadioMenuItem text="Table" onAction="#setView" toggleGroup="$toggleGroup"/>
+        <RadioMenuItem text="Expenses" onAction="#setView" toggleGroup="$toggleGroup"/>
+        <RadioMenuItem text="Incomes" onAction="#setView" toggleGroup="$toggleGroup"/>
     </Menu>
 
 </MenuBar>
